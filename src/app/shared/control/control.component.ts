@@ -1,5 +1,7 @@
 import {
   AfterContentInit,
+  afterNextRender,
+  afterRender,
   Component,
   contentChild,
   ContentChild,
@@ -32,8 +34,20 @@ export class ControlComponent implements AfterContentInit{
       'input'
     );
 
+    constructor() {          //for an initial once change in the application
+      afterRender(() => {
+        console.log('afterRender');
+
+      })
+
+      afterNextRender(() => {        //for each change in the entire application 
+        console.log('afterNextRender');
+      })
+    }
+
+
     ngAfterContentInit() {
-      
+
     }
 
   onClick() {
