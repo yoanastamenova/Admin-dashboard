@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   Component,
   contentChild,
   ContentChild,
@@ -20,20 +21,24 @@ import {
     '(click)': 'onClick()',
   },
 })
-export class ControlComponent {
+export class ControlComponent implements AfterContentInit{
   // @ContentChild('input') private control?: ElementRef<
   //   HTMLInputElement | HTMLTextAreaElement
   // >;
-
-  private ele = inject(ElementRef);
+  label = input.required<string>();
+  private el = inject(ElementRef);
   private control =
     contentChild.required<ElementRef<HTMLInputElement | HTMLTextAreaElement>>(
       'input'
     );
-  label = input.required<string>();
+
+    ngAfterContentInit() {
+      
+    }
 
   onClick() {
     console.log('Clicked!');
+    console.log(this.el);
     console.log(this.control());
   }
 }
